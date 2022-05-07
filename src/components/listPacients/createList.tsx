@@ -1,7 +1,7 @@
-import { ArrowCounterClockwise } from "phosphor-react";
+import { ArrowClockwise } from "phosphor-react";
 import { useState } from "react";
 import { ResultsEntity } from "../../interfaces/pacient";
-import ButtonTable from "../buttonTable";
+import { ButtonTable } from "./buttonTable";
 
 interface resultProps {
   results?: ResultsEntity[]
@@ -9,7 +9,7 @@ interface resultProps {
 
 export const CreateList = ({ results }: resultProps) => {
   const [itemEnd, setItemEnd] = useState(8)
-
+  
   function getRows() {
     const rows = results?.slice(0, itemEnd)
 
@@ -32,13 +32,14 @@ export const CreateList = ({ results }: resultProps) => {
               {`${day}/${month}/${year}`}
             </td>
             <td className="border-2 bg-zinc-100 border-slate-900 p-4 text-slate-900">
-              <ButtonTable />
+              <ButtonTable pacient={pacient}/>
             </td>
           </tr>
         )
       })
   }
 
+  
   if (results) {
     return <>
       <table className="border-collapse w-3/5 min-w-[600px] border bg-zinc-200 text-sm shadow-sm ">
@@ -71,15 +72,19 @@ export const CreateList = ({ results }: resultProps) => {
             setItemEnd(itemEnd + 8)
           }}
         >
-          <ArrowCounterClockwise size={32} />
+          <ArrowClockwise size={32}/>
           Loading more...
         </button>}
       </div>
     </>
   }
+
   return (
     <>
-      <span>Carregando...</span>
+      <div className="flex items-center p-3 font-bold" >
+        <ArrowClockwise size={32} className="animate-spin"/>
+        <span className="ml-2">Loading...</span>
+      </div>
     </>
   );
 }

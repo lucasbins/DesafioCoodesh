@@ -22,13 +22,20 @@ export interface Name {
   last: string;
 }
 export interface Location {
-  street: string;
+  country: string;
+  street: Street;
   city: string;
   state: string;
   postcode: string;
   coordinates: Coordinates;
   timezone: Timezone;
 }
+
+export interface Street {
+  name: string;
+  number: string;
+}
+
 export interface Coordinates {
   latitude: string;
   longitude: string;
